@@ -22,25 +22,24 @@ public class GraphColoring {
 					return false;
 				}
 			}
-			if(color==colors) ++colors;
 		}
 		return false;
 	}
 	
 	// prints out the solution
-	public int solution(int[][] G) {
+	public void solution(int[][] G) {
 		int E = G.length;
 		int[] colored = new int[E];
-		int colors = 1;
-		draw(G, E, colors, colored, 0);
-		System.out.println("Colored result:");
-		for(int color : colored)
-			System.out.print(color + " ");
-		System.out.println("\n");
-		int max = 0;
-		for(int i : colored) 
-			max = i > max ? i : max;
-		return max;
+		int colors = E;
+		if(draw(G, E, colors, colored, 0)) {
+			System.out.println("Colored result:");
+			for(int color : colored)
+				System.out.print(color + " ");
+			System.out.println("\n");
+		}
+		else {
+			System.out.println("No solution!");
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -79,6 +78,6 @@ public class GraphColoring {
 		}
 		System.out.println();
 
-		System.out.print("minimum color needed: " + p.solution(G));
+		p.solution(G);
 	}
 }
