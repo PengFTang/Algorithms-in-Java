@@ -19,7 +19,6 @@ public class GraphColoring {
 				if(draw(G, E, colors, colored, v_id+1)) return true;
 				else {
 					colored[v_id] = 0; // backtracking
-					return false;
 				}
 			}
 		}
