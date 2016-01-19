@@ -10,6 +10,56 @@ Output: ar1[] = {1, 2, 3, 5, 8, 9}
 
 public class InplaceMerge {
 
+	// Method 3 (O(mlogm + nlogn)): 
+	public void merge(int[] arr1, int[] arr2) {
+		int i1=0, i2=0, L1=arr1.length, L2=arr2.length, counter=0;
+		while(counter++<L1) { // counter of items to be placed in arr1
+			if(i2<L2 && arr2[i2]<=arr1[i1]) ++i2; // arr2[i2] will be placed in arr2
+			else ++i1; // arr1[i1] will be placed in arr1 
+		}
+		i2 = 0; // reset arr2 pointer to 0
+		while(i1<L1) {
+			int temp = arr1[i1];
+			arr1[i1] = arr2[i2];
+			arr2[i2] = temp;
+			++i1;
+			++i2;
+		}
+		heapSort(arr1); // sort arr1 in place
+		heapSort(arr2); // sort arr2 in place
+	}
+	
+	public void heapSort(int[] arr) {
+		int N = arr.length-1;
+		heapify(arr);
+		
+		while(N>0) {
+			swap(arr, 0, N--);
+			sink(arr, 0, N);
+		}
+	}
+	// swap elements such that new array is a max-heap
+	private void heapify(int[] arr) {
+		for(int k=(arr.length>>1)-1; k>=0; k--) {
+			sink(arr, k, arr.length-1);
+		}
+	}
+	// swap parent with either of its two children if needed
+	private void sink(int[] arr, int index, int N) {
+		while((index<<1)+1 <= N) {
+			int j = (index<<1)+1;
+			if(j<N && arr[j]<arr[j+1]) j++;
+			if(arr[index]>=arr[j]) break;
+			swap(arr, index, j);
+			index = j;
+		}
+	}
+	private void swap(int[] arr, int index1, int index2) {
+		int temp = arr[index1];
+		arr[index1] = arr[index2];
+		arr[index2] = temp;
+	}
+
 	// Method 2:
 	/* 
 	 * Algorithm:
