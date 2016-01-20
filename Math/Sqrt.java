@@ -1,7 +1,7 @@
 package Math;
 
 /**
- * implements Math.sqrt(x) with two different methods
+ * implements (int)Math.sqrt(x) with two different methods
  * 
  * @author Peng F. Tang
  * pengftang@gmail.com
