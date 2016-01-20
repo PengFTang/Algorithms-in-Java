@@ -44,7 +44,7 @@ public class Divide {
 	    	}
 	    	res += resCurrent; // accumulating final result
 	    	dividend -= divisorCurrent; // update dividend
-    	}
+    	} 
     	return sign==1 ? res : -res;
     }
 	
