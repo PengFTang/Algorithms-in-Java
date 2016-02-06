@@ -2,8 +2,7 @@
 /**
  * An implementation of the KMP searching algorithm based on the understanding of this lecture: https://www.youtube.com/watch?v=GTJr8OvyEVQ
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 
 public class KMP {
