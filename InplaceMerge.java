@@ -183,33 +183,3 @@ public class InplaceMerge {
 		System.out.println();
 	}
 }
-
-/*
-I'd like to give an illustrative reason of why we can not do better than O(mn) in the worst case.
-
-To make the reasoning easier, I will make m=n and suppose it's even. Let's consider the followng example:
-
-arr1 = @ $
-arr2 = # *
-
-where each of the four symbol indicates an array of size n/2. Moreover, they satisfy the following conditions:
-1. $(1) < #(n/2)
-2. @(1) < #(1) < @(2) < #(2) < @(3) < #(3) ...
-
-where $(i) means the ith element in $. An example that satisfies the condition would be:
-
-arr1 = 1, 3, 5, 7, 9, 11
-arr2 = 2, 4, 6, 8, 10, 12
-
-where 
-@ = 1, 3, 5
-# = 2, 4, 6
-
-Under those two conditions, we can claim that the final arr1 would be consisted of all elements in @ and all elements in
-#. Moreover, for #(1), i.e., value 2, we have to insert it into the location of previous @(2), i.e., value 3, and move all elements starting from @(2) to its right, which would cost O(n) time.
-Similarly, for #(2), #(3), etc, we need to do the same thing. In total, it would need O(n*n) time.
-
-Someone might argue that for the above case, we can move every element in @ to its correct position in one step because we know where it has to be in advance. However, this is
-only a trivial case and is true only if condition 2 is true for every elements in @ and #. If some elements in @ or # does not satisfy this condition, we won't know the correct location in advance.
- 
-*/
