@@ -57,23 +57,20 @@ public class Sudoku {
 	 * @param level - difficulty level
 	 */
 	public void createRandomSudoku(int level) {
-		int[] nums = new int[N];
-		for(int i=0; i<N; i++) {
-			nums[i] = i+1;
-		}
-		shuffle(nums);
+		int totalLocations = N*N, remove = 0;
 		
-		for(int j=0; j<N; j++) { // fill in the first row of the Sudoku
-			board[0][j] = (char)(nums[j] + '0');
-		}		
-
+		//push all N*N empty spots into the stack
+		Stack<Integer> emptyLocationList = new Stack<>();
+		for(int i=totalLocations-1; i>=0; i--) {
+			emptyLocationList.push(i);
+		}
+		
 		Random rm = new Random();
 		
-		int starti = rm.nextInt(N), startj = rm.nextInt(N);
-		Stack<Integer> emptyLocationList = getEmptySpots(starti, startj);
-		solve(emptyLocationList); // solve the sudoku
+		// solve the empty Sudoku board
+		solve(emptyLocationList, true, rm); // solve the sudoku
 		
-		int totalLocations = N*N, remove = 0;
+		// set number of spots to be removed
 		switch(level) {
 			case 2:
 				remove = (int)(totalLocations * EMPTY_RATIO_MEDIUM);
@@ -85,17 +82,24 @@ public class Sudoku {
 			default:
 				remove = (int)(totalLocations * EMPTY_RATIO_EASY);
 		}
-
-		boolean[] used = new boolean[totalLocations];
-		while(remove-->0) {
-			int position = rm.nextInt(totalLocations);
-			while(used[position]) {
-				position = rm.nextInt(totalLocations);
-			}
-			used[position] = true;
-			board[position/N][position%N] = 0;
+		
+		// randomly shuffle all indices from 0 to totalLocations-1
+		int[] allLocations = new int[totalLocations];
+		for(int i=0; i<totalLocations; i++) {
+			allLocations[i] = i;
 		}
-
+		shuffle(allLocations);
+		
+		// remove specified amount of spots
+		int startIndex = rm.nextInt(totalLocations);
+		while(remove-- > 0) {
+			int row = allLocations[startIndex]  / N;
+			int col = allLocations[startIndex] % N;
+			board[row][col] = 0;
+			startIndex = (startIndex+1)%totalLocations;
+		}
+		
+		// print out randomly initialized board
 		System.out.println("Original board:");
 		printSudoku();
 	}
@@ -106,7 +110,7 @@ public class Sudoku {
 	 */
 	private void shuffle(int[] nums) {
 		Random rm = new Random();
-		for(int i=1; i<N; i++) {
+		for(int i=1, L=nums.length; i<L; i++) {
 			int pos = rm.nextInt(i+1);
 			swap(nums, pos, i);
 		}
@@ -125,11 +129,11 @@ public class Sudoku {
 	}
 	
 	/**
-	 * solve Sudoku
+	 * solve Sudoku main function
 	 */
 	public void solveSudoku() {
 		Stack<Integer> emptyLocationList = getEmptySpots(0, 0);
-        if(!solve(emptyLocationList)) {
+        if(!solve(emptyLocationList, false, new Random())) {
         	System.out.println("No solution!");
         }
         else {
@@ -139,19 +143,23 @@ public class Sudoku {
     } 
 	
 	/**
-	 * solve the Sudoku until all empty spots are filled
+	 * solve the Sudoku utility function. return false except when all empty spots are filled
 	 * @param emptyLocationList - list of empty spots
+	 * @param startWithRandomInitialValue - flag of whether starting with a random initial value
+	 * @param rm - Random instance
 	 * @return true if all empty spots are filled
 	 */
-	private boolean solve(Stack<Integer> emptyLocationList) { 
+	private boolean solve(Stack<Integer> emptyLocationList, boolean startWithRandomInitialValue, Random rm) { 
 		if(emptyLocationList.size()==0) return true;
 		int firstValue = emptyLocationList.peek();
 		int row = firstValue/N, col = firstValue%N;
-        for(int k=1; k<=N; k++) {
-        	if(isSafe(board, row, col, (char)(k+'0'))) {
-        		board[row][col] = (char)(k+'0');
+		int startIndex = startWithRandomInitialValue ? rm.nextInt(N)+1 : 1;
+        for(int k=startIndex; k<=N+startIndex; k++) {
+        	int trueValue = k%N + 1;
+        	if(isSafe(board, row, col, (char)(trueValue+'0'))) {
+        		board[row][col] = (char)(trueValue+'0');
         		emptyLocationList.pop();
-        		if(solve(emptyLocationList)) return true;
+        		if(solve(emptyLocationList, startWithRandomInitialValue, rm)) return true;
         		board[row][col] = ' ';
         		emptyLocationList.push(firstValue);
         	}
@@ -227,6 +235,7 @@ public class Sudoku {
     }
 	
 	public static void main(String[] args) {
+		
 		/*
 		// get the solution of a given board:
 		String[] board = {
@@ -254,6 +263,5 @@ public class Sudoku {
 		if(sc.hasNext())
 			q.solveSudoku();
 		sc.close();
-		
 	}    
 }
