@@ -3,8 +3,7 @@
  * 
  * The class gives two implementations: an iterative one and a recursive one.
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 
 public class CoinChange {
