@@ -7,8 +7,8 @@ import java.util.Queue;
 
 /**
  * iterative and recursive breadth first traversal of binary tree
- * @author Peng F. Tang
- * pengftang@gmail.com
+ *
+ * @author FLAG
  * @param <T> Generic type
  */
 
