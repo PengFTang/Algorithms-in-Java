@@ -1,8 +1,7 @@
 /**
  * Implements greatest common divisor (GCD) using Euclidean's method that supports negative inputs
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 public class GCD {
 	
