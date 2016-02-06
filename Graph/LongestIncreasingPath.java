@@ -5,9 +5,8 @@ import java.util.List;
 
 /**
  * Computes the length of the longest increasing path in a 2D matrix of integers. Valid directions include: left, right, up or down.
-
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * 
+ * @author FLAG
  */
 
 
