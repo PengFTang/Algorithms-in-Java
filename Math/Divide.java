@@ -8,8 +8,7 @@ import java.util.List;
 /**
  * Divide two integers using only subtraction, addition and bit operation
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 public class Divide {
 	
