@@ -3,8 +3,7 @@ package Math;
 /**
  * implements (int)Math.sqrt(x) with two different methods
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 
 public class Sqrt {
