@@ -6,8 +6,7 @@ import java.util.ArrayList;
 /**
  * All about prime numbers
  * 
- * @author Peng F. Tang
- * pengftang@gmail.com
+ * @author FLAG
  */
 
 public class Prime {
