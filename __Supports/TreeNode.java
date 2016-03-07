@@ -1,13 +1,19 @@
-// package supports;
+//package supports;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class TreeNode {
-    public int val;
+    public int key, val;
     public TreeNode left;
     public TreeNode right;
-    public TreeNode(int x) { val = x; }
+    public TreeNode(int key, int val) { 
+    	this.key = key;
+    	this.val = val;
+    }
+    public TreeNode(int val) { 
+    	this.val = val; 
+    }
     
     public static TreeNode constructTreeFromString(String str) {
     	String[] strs = str.split(",");
