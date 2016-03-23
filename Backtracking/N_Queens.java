@@ -3,7 +3,7 @@
  * 
  * The N-Queen puzzle is the problem of placing chess queens on a square chess board so that no two queens threaten each other.
  * 
- * @author FLAG
+ * @author FLAG   
  */
 
 public class N_Queens {
