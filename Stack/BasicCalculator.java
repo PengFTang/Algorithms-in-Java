@@ -1,6 +1,6 @@
 /*
-Given an expression string, return the final result of this expression. The expression contains only integer, +, -, *, /, (, ).
-Example: For the expression "2*6-(23+7)/(1+2)", return 2
+Given an expression string, return the final result of this expression. The expression contains only integer, spaces, +, -, *, /, (, ).
+Example: For the expression "2 * 6 - (23 + 7) / (1 + 2)", return 2
  */
 
 public class BasicCalculator {
@@ -76,7 +76,7 @@ public class BasicCalculator {
 	public static void main(String[] args) {
 		BasicCalculator q = new BasicCalculator();
 		
-		String s = "2*6-(23+7)/(1+2)";
+		String s = "2 * 6-(23 + 7) / (1 + 2)";
 		
 		int res = q.calculate(s);
 		System.out.println(res);
