@@ -1,6 +1,6 @@
 package sorting;
 
-import java.util.Random;
+import java.util.*;
 
 public class HeapSort {
 
@@ -31,20 +31,20 @@ public class HeapSort {
 	}
 	
 	private void swap(int[] arr, int index1, int index2) {
-		int temp = arr[index1];
+		int t = arr[index1];
 		arr[index1] = arr[index2];
-		arr[index2] = temp;
+		arr[index2] = t;
 	}
 	
 	public static void main(String[] args) {
 		HeapSort heap = new HeapSort();
 		
-		int N = 10;
-		int[] arr = new int[N];
+		
+		int[] arr = new int[10];
 		Random rm = new Random();
 		System.out.println("Original array: ");
 		for(int i=0; i<arr.length; i++) {
-			arr[i] = rm.nextInt(100);
+			arr[i] = rm.nextInt(50);
 			System.out.print(arr[i] + " ");
 		}
 		
